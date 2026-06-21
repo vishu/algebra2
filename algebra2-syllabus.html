@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algebra 2 — Summer Syllabus</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --rule: #c8b89a;
+    --accent: #8b2e12;
+    --light-rule: #e8e0d0;
+    --week-bg: #fffdf8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 40px 20px 80px;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  header {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 32px 0 24px;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 20px;
+  }
+
+  .course-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .meta {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #7a6a5a;
+    line-height: 1.8;
+  }
+
+  /* Intro */
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .intro-block h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3a2f25;
+  }
+
+  /* Big domain dividers */
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 28px;
+  }
+
+  .domain-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--light-rule);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .domain-info {
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .domain-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .domain-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .domain-weeks {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #7a6a5a;
+    margin-top: 4px;
+  }
+
+  /* Week cards */
+  .week-card {
+    background: var(--week-bg);
+    border: 1px solid var(--light-rule);
+    border-left: 4px solid var(--rule);
+    margin-bottom: 16px;
+    padding: 24px 28px;
+    position: relative;
+  }
+
+  .week-card:hover {
+    border-left-color: var(--accent);
+    box-shadow: 4px 4px 0 var(--light-rule);
+  }
+
+  .week-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--light-rule);
+  }
+
+  .week-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .week-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .cc-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: #9a8a7a;
+    background: var(--light-rule);
+    padding: 3px 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .week-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .topics-col h4, .tips-col h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7a6a5a;
+    margin-bottom: 8px;
+  }
+
+  .topics-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .topics-col ul li {
+    font-size: 13px;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+    color: #2a2018;
+  }
+
+  .topics-col ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--rule);
+    font-size: 10px;
+  }
+
+  .tips-col p {
+    font-size: 12.5px;
+    color: #5a4a3a;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* Milestone bar */
+  .milestone {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 28px;
+    margin: 24px 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .milestone span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .milestone strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* Big picture section */
+  .big-picture {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 3px solid var(--ink);
+  }
+
+  .big-picture h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+
+  .threads {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .thread {
+    border-top: 2px solid var(--accent);
+    padding-top: 14px;
+  }
+
+  .thread h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .thread p {
+    font-size: 13px;
+    color: #3a2f25;
+    line-height: 1.6;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #9a8a7a;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 600px) {
+    .intro { grid-template-columns: 1fr; }
+    .week-body { grid-template-columns: 1fr; }
+    .threads { grid-template-columns: 1fr; }
+    header { grid-template-columns: 1fr; }
+    .meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="course-label">Common Core · HSA / HSF / HSN</div>
+      <h1>Algebra 2<br>Summer Syllabus</h1>
+    </div>
+    <div class="meta">
+      8 weeks<br>
+      ~3 sessions / week<br>
+      ~45–60 min / session<br>
+      Summer 2025
+    </div>
+  </header>
+
+  <div class="intro">
+    <div class="intro-block">
+      <h3>Purpose</h3>
+      <p>A parent-led summer preview of the full Common Core Algebra 2 curriculum. The goal is conceptual fluency — understanding <em>why</em> the math works — not drill practice. Your son will arrive at class already knowing the terrain.</p>
+    </div>
+    <div class="intro-block">
+      <h3>How to use this</h3>
+      <p>Each week has 3 natural sessions. Start by asking "what do you already know?" before introducing anything. The physics parent notes are reminders of how each topic connects to what you already know deeply.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DOMAIN 1 -->
+  <div class="domain-header">
+    <div class="domain-num">I</div>
+    <div class="domain-info">
+      <div class="domain-tag">Domain</div>
+      <div class="domain-title">Polynomials, Rational &amp; Radical Expressions</div>
+      <div class="domain-weeks">Weeks 1–2 · CC Standards: HSA-APR, HSA-REI</div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 01</div>
+        <div class="week-title">Polynomial Operations &amp; the Structure of Algebra</div>
+      </div>
+      <div class="cc-tag">HSA-APR.A.1 · HSA-APR.B.2–3</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Review: factoring quadratics (GCF, trinomials, difference of squares)</li>
+          <li>Polynomial long division &amp; synthetic division</li>
+          <li>Remainder Theorem &amp; Factor Theorem</li>
+          <li>Finding zeros of polynomials; multiplicity &amp; graphical behavior</li>
+          <li>Fundamental Theorem of Algebra (statement)</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>The Factor Theorem is the algebraic version of finding roots of characteristic equations — you did this in differential equations and normal modes. Multiplicity is why a critically damped oscillator's solution has a repeated root.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 02</div>
+        <div class="week-title">Rational Exponents, Radicals &amp; Complex Numbers</div>
+      </div>
+      <div class="cc-tag">HSN-RN.A.1–2 · HSN-CN.A.1–3 · HSN-CN.C.7</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Rational exponents ↔ radical equivalence (x^(p/q) = ∜xᵖ)</li>
+          <li>Simplifying radical expressions; rationalizing denominators</li>
+          <li>Imaginary unit i; complex numbers a + bi</li>
+          <li>Arithmetic of complex numbers (add, subtract, multiply, conjugates)</li>
+          <li>Solving quadratics with complex solutions via quadratic formula</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>You know complex numbers well — impedance, wave functions, Euler's formula. Keep it simple here: your son just needs i² = −1 and the arithmetic rules. The geometric view (Argand plane) is a nice enrichment if he's curious.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <span>Checkpoint 1</span>
+    <strong>Can he factor any polynomial, divide it, and find all roots including complex ones?</strong>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DOMAIN 2 -->
+  <div class="domain-header">
+    <div class="domain-num">II</div>
+    <div class="domain-info">
+      <div class="domain-tag">Domain</div>
+      <div class="domain-title">Functions — Families, Transformations &amp; Inverses</div>
+      <div class="domain-weeks">Weeks 3–4 · CC Standards: HSF-IF, HSF-BF</div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 03</div>
+        <div class="week-title">Interpreting &amp; Building Functions; Transformations</div>
+      </div>
+      <div class="cc-tag">HSF-IF.A–C · HSF-BF.A.1 · HSF-BF.B.3</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Domain, range, and function notation review</li>
+          <li>Even/odd functions; symmetry</li>
+          <li>Transformations: shifts, reflections, stretches (f(x) → af(bx−h)+k)</li>
+          <li>Piecewise functions and absolute value functions</li>
+          <li>Combining functions: (f+g), (f·g), f(g(x)) — composition</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>Transformation fluency is essential for reading graphs fast. The a/b/h/k framework is the same one used to describe amplitude, frequency, phase, and offset in wave functions. This week builds visual intuition, not computation — draw everything.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 04</div>
+        <div class="week-title">Inverse Functions; Square Root &amp; Cube Root Functions</div>
+      </div>
+      <div class="cc-tag">HSF-BF.B.4 · HSF-IF.C.7b</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>One-to-one functions; horizontal line test</li>
+          <li>Finding inverse functions algebraically and graphically</li>
+          <li>Domain restriction to create invertible functions</li>
+          <li>Graphing √x and ∛x and their transformations</li>
+          <li>Solving radical equations; checking for extraneous solutions</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>Extraneous solutions are a key concept — they arise whenever you square both sides. Good moment to discuss why algebraic manipulations can introduce false solutions (you've seen this in physics when you square an equation to eliminate a radical). Always verify solutions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <span>Checkpoint 2</span>
+    <strong>Can he graph any standard function family with transformations and find its inverse?</strong>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DOMAIN 3 -->
+  <div class="domain-header">
+    <div class="domain-num">III</div>
+    <div class="domain-info">
+      <div class="domain-tag">Domain</div>
+      <div class="domain-title">Exponential &amp; Logarithmic Functions</div>
+      <div class="domain-weeks">Weeks 5–6 · CC Standards: HSF-IF.C, HSF-LE, HSF-BF</div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 05</div>
+        <div class="week-title">Exponential Functions &amp; e</div>
+      </div>
+      <div class="cc-tag">HSF-IF.C.7e · HSF-LE.A.2–4 · HSF-BF.B.5</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Exponential growth and decay: f(x) = abˣ</li>
+          <li>The number e and natural exponential function eˣ</li>
+          <li>Graphing exponential functions and transformations</li>
+          <li>Modeling: half-life, population growth, compound interest</li>
+          <li>Distinguishing linear vs. exponential growth from tables/graphs</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>You know e deeply — RC circuits, radioactive decay, thermal equilibration. Help him see e not just as a number but as the base of natural growth. Compound interest is the cleanest first model; half-life gives the decay intuition without needing calculus.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 06</div>
+        <div class="week-title">Logarithmic Functions &amp; Equations</div>
+      </div>
+      <div class="cc-tag">HSF-BF.B.5 · HSF-LE.A.4 · HSA-REI.D.11</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Logarithm as the inverse of exponentiation: log_b(x) = y ↔ bʸ = x</li>
+          <li>Common log (log) and natural log (ln)</li>
+          <li>Properties of logarithms: product, quotient, power rules</li>
+          <li>Change of base formula</li>
+          <li>Solving exponential and logarithmic equations</li>
+          <li>Graphing logarithmic functions; domain restrictions</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>Log properties are basically exponent rules in disguise. The hardest thing for students isn't the rules — it's trusting that log(ab) = log a + log b. You can show this is just the product rule for exponents. Decibels and Richter scale are great real-world motivators.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <span>Checkpoint 3</span>
+    <strong>Can he move fluidly between exponential and logarithmic form and solve equations in both?</strong>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DOMAIN 4 -->
+  <div class="domain-header">
+    <div class="domain-num">IV</div>
+    <div class="domain-info">
+      <div class="domain-tag">Domain</div>
+      <div class="domain-title">Trigonometric Functions</div>
+      <div class="domain-weeks">Week 7 · CC Standards: HSF-TF</div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 07</div>
+        <div class="week-title">Trigonometry Extended to the Unit Circle</div>
+      </div>
+      <div class="cc-tag">HSF-TF.A.1–4 · HSF-TF.B.5</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Radian measure; converting degrees ↔ radians</li>
+          <li>Unit circle: defining sin, cos, tan for all angles</li>
+          <li>Key values: 0, π/6, π/4, π/3, π/2 and their multiples</li>
+          <li>Graphing y = sin x and y = cos x; amplitude, period, phase shift</li>
+          <li>Graphing y = tan x; asymptotes</li>
+          <li>Modeling periodic phenomena with sinusoidal functions</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>This is the week where your physics background is most valuable. Amplitude, period, frequency, phase — you've used these constantly. The unit circle is just the geometric definition; radians are natural (arc length = rθ). He should understand sin/cos as projections, not just ratios.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <span>Checkpoint 4</span>
+    <strong>Can he sketch a sinusoidal function from its equation and write one from a graph?</strong>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DOMAIN 5 -->
+  <div class="domain-header">
+    <div class="domain-num">V</div>
+    <div class="domain-info">
+      <div class="domain-tag">Domain</div>
+      <div class="domain-title">Statistics &amp; Probability</div>
+      <div class="domain-weeks">Week 8 · CC Standards: HSS-ID, HSS-IC, HSS-CP</div>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-card-header">
+      <div>
+        <div class="week-label">Week 08</div>
+        <div class="week-title">Data Analysis, Probability &amp; Statistical Inference</div>
+      </div>
+      <div class="cc-tag">HSS-ID.A.4 · HSS-IC.A–B · HSS-CP.A–B</div>
+    </div>
+    <div class="week-body">
+      <div class="topics-col">
+        <h4>Topics</h4>
+        <ul>
+          <li>Normal distribution: shape, mean, standard deviation, 68-95-99.7 rule</li>
+          <li>z-scores and percentiles</li>
+          <li>Sample vs. population; sampling variability</li>
+          <li>Interpreting margin of error and confidence intervals (conceptually)</li>
+          <li>Conditional probability; independence</li>
+          <li>Counting: permutations and combinations</li>
+          <li>Binomial probability (intro)</li>
+        </ul>
+      </div>
+      <div class="tips-col">
+        <h4>Physics parent note</h4>
+        <p>Stats is often the weakest week in Algebra 2 classes — many teachers rush it. The normal distribution is worth lingering on: measurement error in lab is exactly this. The key conceptual leap is distinguishing a population parameter from a sample statistic. Real understanding here pays off in every science course.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Big picture threads -->
+  <div class="big-picture">
+    <h2>The Three Big Threads</h2>
+    <div class="threads">
+      <div class="thread">
+        <h4>Functions as Objects</h4>
+        <p>Algebra 2 is where students stop computing with functions and start <em>reasoning about</em> them. Transformation rules, inverses, composition — all of this is treating a function as a thing you can manipulate, not just evaluate.</p>
+      </div>
+      <div class="thread">
+        <h4>Extending Number Systems</h4>
+        <p>Each unit pushes the number system outward: real → complex, integers → rationals, rationals → irrationals. This theme runs from Week 1 through Week 3. Help him see it as one continuous story about what "number" means.</p>
+      </div>
+      <div class="thread">
+        <h4>Modeling the Real World</h4>
+        <p>Every function family has a natural home: polynomials for motion, exponentials for growth/decay, sinusoids for oscillation. The statistics unit asks: what does data tell us about an underlying model? This is the physicist's question.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Common Core State Standards · High School Mathematics</span>
+    <span>8 Weeks · ~24 Sessions Total</span>
+  </footer>
+
+</div>
+</body>
+</html>

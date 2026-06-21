@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 — Polynomials</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #171b24;
+    --surface2: #1e2330;
+    --border: #2a3040;
+    --text: #dde3ef;
+    --muted: #7a8499;
+    --accent: #5b8dee;
+    --accent2: #e8934a;
+    --green: #52c97a;
+    --red: #e05c5c;
+    --yellow: #e8c84a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    line-height: 1.65;
+    padding: 40px 20px 80px;
+  }
+
+  .page { max-width: 780px; margin: 0 auto; }
+
+  /* Header */
+  header {
+    padding: 40px 0 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  .header-sub {
+    margin-top: 12px;
+    font-size: 16px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Topic nav */
+  .topic-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 52px;
+  }
+
+  .topic-nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    transition: all 0.15s;
+  }
+  .topic-nav a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 60px;
+    scroll-margin-top: 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(91,141,238,0.1);
+    border: 1px solid rgba(91,141,238,0.25);
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  /* Prose */
+  .prose p { margin-bottom: 14px; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* Math display blocks */
+  .math-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 18px 22px;
+    margin: 20px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 2;
+    overflow-x: auto;
+    color: #c8d8f8;
+  }
+
+  .math-block .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Key concept callout */
+  .concept {
+    background: rgba(91,141,238,0.07);
+    border: 1px solid rgba(91,141,238,0.2);
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+
+  .concept-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .concept p { font-size: 17px; color: var(--text); }
+
+  /* Warning / watch out */
+  .watch {
+    background: rgba(232,147,74,0.07);
+    border: 1px solid rgba(232,147,74,0.25);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .watch-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .watch p { font-size: 16px; color: #d4b890; }
+
+  /* Example worked problem */
+  .example {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 22px 24px;
+    margin: 24px 0;
+  }
+
+  .example-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+
+  .example-problem {
+    font-style: italic;
+    color: #aab8d4;
+    margin-bottom: 16px;
+    font-size: 17px;
+  }
+
+  .example-steps {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2.2;
+    color: #c8d8f8;
+  }
+
+  .example-steps .comment {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* Practice problems */
+  .practice {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--yellow);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .practice-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+
+  .practice ol {
+    padding-left: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 2.2;
+    color: #c8d8f8;
+  }
+
+  /* Theorem box */
+  .theorem {
+    background: rgba(82,201,122,0.06);
+    border: 1px solid rgba(82,201,122,0.2);
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .theorem-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .theorem p { font-size: 17px; }
+  .theorem .stmt {
+    font-style: italic;
+    color: #a8e8c0;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(82,201,122,0.15);
+  }
+
+  /* Summary table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin: 20px 0;
+  }
+  th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,48,64,0.6);
+    color: #c8d8f8;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: var(--accent2); }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* Big summary */
+  .week-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-top: 60px;
+  }
+  .week-summary h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .week-summary ul {
+    padding-left: 20px;
+    line-height: 2;
+    color: var(--text);
+    font-size: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    table { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="breadcrumb">Algebra 2 · Summer Preview · Week 1 of 8</div>
+    <h1>Polynomials,<br>Zeros, &amp; <em>Structure</em></h1>
+    <div class="header-sub">5 topics · Factoring → Division → Theorems → Zeros → FTA</div>
+  </header>
+
+  <div class="topic-nav">
+    <a href="#factoring">1. Factoring</a>
+    <a href="#division">2. Division</a>
+    <a href="#theorems">3. Remainder &amp; Factor Theorems</a>
+    <a href="#zeros">4. Zeros &amp; Multiplicity</a>
+    <a href="#fta">5. Fundamental Theorem</a>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 1 -->
+  <div class="section" id="factoring">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Review: Factoring Polynomials</h2>
+    </div>
+
+    <div class="prose">
+      <p>Factoring means rewriting a polynomial as a product of simpler polynomials. It's the reverse of multiplying. You should know three patterns cold.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">The three patterns</span>
+      GCF (greatest common factor):
+        6x³ + 9x²  =  3x²(2x + 3)
+
+      Difference of squares:
+        a² − b²  =  (a + b)(a − b)
+
+      Trinomial (when leading coeff = 1):
+        x² + bx + c  =  (x + p)(x + q)
+        where p + q = b  and  p · q = c
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Key idea</div>
+      <p>When you factor a trinomial x² + bx + c, you're asking: <em>what two numbers multiply to c and add to b?</em> That's the whole game. Everything else is variations on that question.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Trinomial</div>
+      <div class="example-problem">Factor: x² − x − 12</div>
+      <div class="example-steps">
+        Need two numbers that multiply to −12, add to −1.
+        
+        Try: (−4) × (3) = −12  ✓
+              (−4) + (3) = −1  ✓
+
+        Answer: (x − 4)(x + 3)
+
+        <span class="comment">// Check by expanding: x² + 3x − 4x − 12 = x² − x − 12 ✓</span>
+      </div>
+    </div>
+
+    <div class="watch">
+      <div class="watch-label">Watch out</div>
+      <p>When the leading coefficient isn't 1 — like 2x² + 7x + 3 — you can't just look for two numbers. You need to factor by grouping or use the AC method. This trips students up because they try to apply the simple rule and it doesn't work.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">AC Method — when leading coefficient ≠ 1</span>
+      Factor: 2x² + 7x + 3
+
+      Step 1: Multiply a · c = 2 · 3 = 6
+      Step 2: Find two numbers that multiply to 6, add to 7: → 1 and 6
+      Step 3: Rewrite the middle term: 2x² + x + 6x + 3
+      Step 4: Factor by grouping:
+              x(2x + 1) + 3(2x + 1)
+              = (x + 3)(2x + 1)
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Factoring</div>
+      <ol>
+        <li>x² + 5x + 6</li>
+        <li>x² − 9</li>
+        <li>3x² − 12x</li>
+        <li>2x² − 5x − 3</li>
+        <li>x² − 16 (trick: don't forget this is difference of squares)</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 2 -->
+  <div class="section" id="division">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Polynomial Long Division &amp; Synthetic Division</h2>
+    </div>
+
+    <div class="prose">
+      <p>Just as you can divide integers (17 ÷ 5 = 3 remainder 2), you can divide polynomials. The result has the same structure: a quotient and a remainder.</p>
+      <p>The general form: if you divide polynomial f(x) by d(x), you get</p>
+    </div>
+
+    <div class="math-block">
+      f(x) = d(x) · q(x) + r(x)
+
+      where the degree of r(x) is less than the degree of d(x)
+      
+      (This is the polynomial division algorithm — same idea as integer division)
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Long Division</div>
+      <div class="example-problem">Divide: (2x³ − 3x² + x − 5) ÷ (x − 2)</div>
+      <div class="example-steps">
+        How many times does x go into 2x³?  → 2x²
+        Multiply: 2x²(x − 2) = 2x³ − 4x²
+        Subtract: (2x³ − 3x²) − (2x³ − 4x²) = x²
+        Bring down: x² + x
+        
+        How many times does x go into x²?  → x
+        Multiply: x(x − 2) = x² − 2x
+        Subtract: (x² + x) − (x² − 2x) = 3x
+        Bring down: 3x − 5
+        
+        How many times does x go into 3x?  → 3
+        Multiply: 3(x − 2) = 3x − 6
+        Subtract: (3x − 5) − (3x − 6) = 1
+
+        Result: 2x² + x + 3,  remainder 1
+
+        <span class="comment">// So: (2x³−3x²+x−5) = (x−2)(2x²+x+3) + 1</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Synthetic Division — the shortcut</div>
+      <p>When the divisor is linear (x − c), you can use synthetic division: a compressed algorithm that works only with the coefficients. It's much faster once you get the hang of it, and it's what you'll use 90% of the time.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Synthetic Division — same problem: (2x³ − 3x² + x − 5) ÷ (x − 2)</span>
+      Divisor is (x − 2), so c = 2
+
+      Write coefficients of dividend:  2  |  2   -3    1   -5
+                                           |       4    2    6
+                                           +--------------------
+                                              2    1    3    1
+                                                         ↑remainder
+
+      Read result: quotient = 2x² + x + 3,  remainder = 1  ✓
+      
+      Rule: bring down first coeff, then multiply by c and add down each column.
+    </div>
+
+    <div class="watch">
+      <div class="watch-label">Missing terms</div>
+      <p>If a degree is missing from the polynomial (e.g., x³ + 2x − 1 has no x² term), you must insert a 0 placeholder in the coefficients: 1, 0, 2, −1. Forgetting this is the #1 synthetic division mistake.</p>
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Division</div>
+      <ol>
+        <li>(x² + 3x − 10) ÷ (x − 2)  — try long division first</li>
+        <li>(2x³ + x² − 5x + 2) ÷ (x + 1)  — use synthetic division</li>
+        <li>(x³ − 8) ÷ (x − 2)  — watch for the missing terms!</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 3 -->
+  <div class="section" id="theorems">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Remainder Theorem &amp; Factor Theorem</h2>
+    </div>
+
+    <div class="prose">
+      <p>These two theorems connect division, remainders, and zeros into a single elegant idea. They're short to state but deeply useful.</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Remainder Theorem</div>
+      <p>When a polynomial f(x) is divided by (x − c), the remainder equals f(c).</p>
+      <p class="stmt">You don't need to do the full division to find the remainder — just evaluate the polynomial at x = c.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example</div>
+      <div class="example-problem">What is the remainder when f(x) = x³ − 4x + 1 is divided by (x − 3)?</div>
+      <div class="example-steps">
+        By Remainder Theorem: remainder = f(3)
+        
+        f(3) = (3)³ − 4(3) + 1
+             = 27 − 12 + 1
+             = 16
+
+        Remainder = 16
+        <span class="comment">// No long division needed at all.</span>
+      </div>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Factor Theorem</div>
+      <p>(x − c) is a factor of f(x) if and only if f(c) = 0.</p>
+      <p class="stmt">The remainder is zero exactly when c is a root of f(x). Factor Theorem is just the Remainder Theorem applied to the case where the remainder = 0.</p>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Why this matters</div>
+      <p>Together these let you verify factors quickly. If you suspect (x − 2) is a factor of some polynomial, just check whether f(2) = 0. If it is, you know (x − 2) divides evenly with no remainder — so it's a factor.</p>
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Theorems</div>
+      <ol>
+        <li>Find the remainder when x⁴ − 2x³ + x − 5 is divided by (x − 1). Use the Remainder Theorem.</li>
+        <li>Is (x + 2) a factor of x³ + 3x² − 4? Show your reasoning using the Factor Theorem.</li>
+        <li>Find a value of k so that (x − 3) is a factor of x² + kx − 6.</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 4 -->
+  <div class="section" id="zeros">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Zeros of Polynomials &amp; Multiplicity</h2>
+    </div>
+
+    <div class="prose">
+      <p>A <strong>zero</strong> (also called a <em>root</em>) of a polynomial f(x) is a value c where f(c) = 0. By the Factor Theorem, every zero c gives a factor (x − c), and every factor gives a zero. They're the same thing from two angles.</p>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Zeros ↔ Factors ↔ x-intercepts</div>
+      <p>These three things are always the same thing: a zero of f(x), a root of f(x) = 0, and an x-intercept of the graph of y = f(x). Make sure those three descriptions feel like the same object to you.</p>
+    </div>
+
+    <div class="prose">
+      <p><strong>Multiplicity</strong> refers to how many times a particular root appears as a factor. A root c has multiplicity k if (x − c)ᵏ divides f(x) but (x − c)ᵏ⁺¹ does not.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Multiplicity and graph behavior</span>
+      f(x) = (x − 1)²(x + 3)
+
+      Zeros: x = 1 (multiplicity 2),  x = −3 (multiplicity 1)
+
+      At x = −3 (odd multiplicity): graph CROSSES the x-axis
+      At x = 1  (even multiplicity): graph TOUCHES and TURNS AROUND
+
+      This is the key visual rule: odd → crosses, even → bounces.
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Finding all zeros</div>
+      <div class="example-problem">Find all zeros of f(x) = x³ − 2x² − 5x + 6</div>
+      <div class="example-steps">
+        Step 1: Try the Rational Root candidates: ±1, ±2, ±3, ±6
+        
+        f(1) = 1 − 2 − 5 + 6 = 0  ✓ → (x − 1) is a factor
+        
+        Step 2: Divide out (x − 1) using synthetic division:
+        
+          1  |  1   -2   -5    6
+             |       1   -1   -6
+             +------------------
+                1   -1   -6    0
+
+        Quotient: x² − x − 6
+        
+        Step 3: Factor the quotient:
+          x² − x − 6 = (x − 3)(x + 2)
+
+        All zeros: x = 1, x = 3, x = −2  (each multiplicity 1)
+
+        <span class="comment">// f(x) = (x − 1)(x − 3)(x + 2)</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Rational Root Theorem</div>
+      <p>For a polynomial with integer coefficients, any rational zero must have the form p/q where p divides the constant term and q divides the leading coefficient. This gives you a finite list of candidates to test.</p>
+    </div>
+
+    <div class="watch">
+      <div class="watch-label">End behavior</div>
+      <p>The sign of the leading coefficient and whether the degree is even or odd completely determine what the graph does at far left and far right. Even degree → both ends go same direction. Odd degree → ends go opposite directions. Positive leading coefficient → right end goes up.</p>
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Zeros</div>
+      <ol>
+        <li>State the zeros and multiplicities: f(x) = (x + 1)³(x − 2)²</li>
+        <li>At which zeros does the graph cross the x-axis? At which does it bounce?</li>
+        <li>Find all zeros: f(x) = x³ + x² − 4x − 4</li>
+        <li>A cubic polynomial has zeros at x = −1, 0, and 4. Write a possible equation for f(x).</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 5 -->
+  <div class="section" id="fta">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>The Fundamental Theorem of Algebra</h2>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Fundamental Theorem of Algebra</div>
+      <p>Every polynomial of degree n ≥ 1 with complex coefficients has exactly n zeros in the complex numbers, counted with multiplicity.</p>
+      <p class="stmt">A degree-3 polynomial has exactly 3 zeros. A degree-5 polynomial has exactly 5 zeros. Always. (Some may be complex, some may be repeated.)</p>
+    </div>
+
+    <div class="prose">
+      <p>In Algebra 2 you mostly work with polynomials that have real coefficients. For those, a crucial corollary applies:</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Complex Conjugate Root Theorem</div>
+      <p>If a polynomial has real coefficients and (a + bi) is a zero, then its conjugate (a − bi) is also a zero.</p>
+      <p class="stmt">Complex roots always come in conjugate pairs when the coefficients are real. You can never have just one complex root.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Using FTA to find a polynomial</div>
+      <div class="example-problem">Write a degree-4 polynomial with real coefficients that has zeros: x = 3, x = −1, x = 2i</div>
+      <div class="example-steps">
+        Since 2i is a zero and coefficients are real, −2i must also be a zero.
+
+        So the four zeros are: 3, −1, 2i, −2i
+
+        Factors: (x − 3)(x + 1)(x − 2i)(x + 2i)
+
+        Combine complex pair first:
+          (x − 2i)(x + 2i) = x² − (2i)² = x² + 4
+
+        Final answer:
+          f(x) = (x − 3)(x + 1)(x² + 4)
+
+        <span class="comment">// Expand if needed; stays real because complex pair produced real factor</span>
+      </div>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Summary — Counting zeros of a real polynomial</span>
+      Degree 1:  always 1 real zero
+      Degree 2:  2 real zeros, OR 1 repeated real zero, OR 2 complex conjugates
+      Degree 3:  1 or 3 real zeros  (complex zeros come in pairs, so can't have 2)
+      Degree 4:  0, 2, or 4 real zeros
+      Degree n:  at least 1 real zero if n is odd
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — FTA</div>
+      <ol>
+        <li>A degree-5 polynomial with real coefficients has zeros 1, 2, 3, and (1 + i). How many zeros does it have in total? What is the fifth zero?</li>
+        <li>Write a polynomial with real coefficients of least possible degree that has zeros x = 4 and x = 3i.</li>
+        <li>Can a degree-4 polynomial with real coefficients have exactly 3 real zeros and 1 complex zero? Explain.</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Summary -->
+  <div class="week-summary">
+    <h3>Week 1 — What you should be able to do</h3>
+    <ul>
+      <li>Factor any polynomial: GCF, difference of squares, trinomials, AC method</li>
+      <li>Divide a polynomial by a linear factor using long division or synthetic division</li>
+      <li>Use the Remainder Theorem to find remainders without dividing</li>
+      <li>Use the Factor Theorem to test whether a value is a zero</li>
+      <li>Find all real zeros of a cubic using Rational Root Theorem + synthetic division</li>
+      <li>Describe the multiplicity of each zero and predict whether the graph crosses or bounces</li>
+      <li>Apply the FTA: know how many zeros any polynomial must have, and that complex roots come in conjugate pairs</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
