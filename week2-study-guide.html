@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 — Radicals & Complex Numbers</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #171b24;
+    --surface2: #1e2330;
+    --border: #2a3040;
+    --text: #dde3ef;
+    --muted: #7a8499;
+    --accent: #5b8dee;
+    --accent2: #e8934a;
+    --green: #52c97a;
+    --red: #e05c5c;
+    --yellow: #e8c84a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    line-height: 1.65;
+    padding: 40px 20px 80px;
+  }
+
+  .page { max-width: 780px; margin: 0 auto; }
+
+  header {
+    padding: 40px 0 36px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  .header-sub {
+    margin-top: 12px;
+    font-size: 16px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .topic-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 52px;
+  }
+
+  .topic-nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    transition: all 0.15s;
+  }
+  .topic-nav a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .section {
+    margin-bottom: 60px;
+    scroll-margin-top: 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(91,141,238,0.1);
+    border: 1px solid rgba(91,141,238,0.25);
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .prose p { margin-bottom: 14px; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  .math-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 18px 22px;
+    margin: 20px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 2;
+    overflow-x: auto;
+    color: #c8d8f8;
+    white-space: pre;
+  }
+
+  .math-block .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    display: block;
+    white-space: normal;
+  }
+
+  .concept {
+    background: rgba(91,141,238,0.07);
+    border: 1px solid rgba(91,141,238,0.2);
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+
+  .concept-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .concept p { font-size: 17px; color: var(--text); margin-bottom: 8px; }
+  .concept p:last-child { margin-bottom: 0; }
+
+  .watch {
+    background: rgba(232,147,74,0.07);
+    border: 1px solid rgba(232,147,74,0.25);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .watch-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .watch p { font-size: 16px; color: #d4b890; margin-bottom: 6px; }
+  .watch p:last-child { margin-bottom: 0; }
+
+  .example {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 22px 24px;
+    margin: 24px 0;
+  }
+
+  .example-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+
+  .example-problem {
+    font-style: italic;
+    color: #aab8d4;
+    margin-bottom: 16px;
+    font-size: 17px;
+  }
+
+  .example-steps {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2.2;
+    color: #c8d8f8;
+    white-space: pre;
+  }
+
+  .example-steps .comment {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .practice {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--yellow);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .practice-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+
+  .practice ol {
+    padding-left: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 2.2;
+    color: #c8d8f8;
+  }
+
+  .theorem {
+    background: rgba(82,201,122,0.06);
+    border: 1px solid rgba(82,201,122,0.2);
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .theorem-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .theorem p { font-size: 17px; margin-bottom: 8px; }
+  .theorem p:last-child { margin-bottom: 0; }
+  .theorem .stmt {
+    font-style: italic;
+    color: #a8e8c0;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(82,201,122,0.15);
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .week-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-top: 60px;
+  }
+  .week-summary h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .week-summary ul {
+    padding-left: 20px;
+    line-height: 2;
+    color: var(--text);
+    font-size: 16px;
+  }
+
+  /* Two-column layout for side-by-side comparisons */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .two-col .math-block { margin: 0; }
+
+  @media (max-width: 600px) {
+    .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="breadcrumb">Algebra 2 · Summer Preview · Week 2 of 8</div>
+    <h1>Radicals, Exponents,<br>&amp; <em>Complex Numbers</em></h1>
+    <div class="header-sub">5 topics · Rational Exponents → Radicals → Simplifying → Complex Arithmetic → Quadratics</div>
+  </header>
+
+  <div class="topic-nav">
+    <a href="#rational-exp">1. Rational Exponents</a>
+    <a href="#radicals">2. Simplifying Radicals</a>
+    <a href="#rationalizing">3. Rationalizing</a>
+    <a href="#complex">4. Complex Numbers</a>
+    <a href="#quadratics">5. Complex Solutions</a>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 1 -->
+  <div class="section" id="rational-exp">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Rational Exponents</h2>
+    </div>
+
+    <div class="prose">
+      <p>You already know integer exponents. Rational exponents extend that idea to fractions — and they connect directly to radicals. The key is understanding what the notation means, not just memorizing rules.</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Definition</div>
+      <p>For any real number a and integers m and n (n > 0, and a ≥ 0 when n is even):</p>
+      <p class="stmt">a^(1/n) = the nth root of a = ⁿ√a<br><br>
+      a^(m/n) = (ⁿ√a)^m = ⁿ√(a^m)<br><br>
+      Both forms are equivalent — take the root first or the power first, same answer.</p>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Why this definition makes sense</div>
+      <p>If exponent rules are going to keep working, then a^(1/2) · a^(1/2) must equal a^1 = a. So a^(1/2) must be the number that multiplied by itself gives a — which is exactly √a. The definition isn't arbitrary; it's forced by consistency.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Examples</span>
+8^(1/3)     = ∛8           = 2
+16^(3/4)    = (⁴√16)³      = 2³        = 8
+27^(-2/3)   = 1/27^(2/3)   = 1/(∛27)²  = 1/9
+(-8)^(1/3)  = ∛(-8)        = -2        (odd root of negative: OK)
+(-4)^(1/2)  = √(-4)        = not real  (even root of negative: not real)</div>
+
+    <div class="watch">
+      <div class="watch-label">Negative bases</div>
+      <p>Even roots of negative numbers are not real — they lead to complex numbers (covered in section 4). Odd roots of negatives are fine and give a negative result. This distinction matters when simplifying.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">All the exponent rules still apply</span>
+a^(m/n) · a^(p/q)  =  a^(m/n + p/q)      (add exponents, same base)
+(a^(m/n))^(p/q)    =  a^(mp/nq)           (multiply exponents)
+(ab)^(m/n)         =  a^(m/n) · b^(m/n)   (distribute over product)
+a^(-m/n)           =  1 / a^(m/n)         (negative → reciprocal)</div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Simplifying with rational exponents</div>
+      <div class="example-problem">Simplify: (8x⁶)^(2/3)</div>
+      <div class="example-steps">
+(8x⁶)^(2/3)  =  8^(2/3) · (x⁶)^(2/3)     distribute exponent
+
+8^(2/3)      =  (∛8)²  =  2²  =  4
+
+(x⁶)^(2/3)  =  x^(6 · 2/3)  =  x⁴
+
+Answer: 4x⁴
+<span class="comment">// The key move: distribute the rational exponent over the product, then handle each piece.</span></div>
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Rational Exponents</div>
+      <ol>
+        <li>Rewrite as a radical: x^(3/5)</li>
+        <li>Rewrite with a rational exponent: ⁴√(x³)</li>
+        <li>Simplify: 32^(3/5)</li>
+        <li>Simplify: (27a⁹)^(2/3)</li>
+        <li>Simplify: x^(1/2) · x^(2/3)  (hint: add the exponents, find common denominator)</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 2 -->
+  <div class="section" id="radicals">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Simplifying Radical Expressions</h2>
+    </div>
+
+    <div class="prose">
+      <p>A radical is in <strong>simplified form</strong> when: no perfect nth powers remain under the radical, no fractions are under the radical, and no radicals are in a denominator. Simplifying is mostly about pulling perfect powers out from under the root sign.</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Product and Quotient Rules for Radicals</div>
+      <p>ⁿ√(ab) = ⁿ√a · ⁿ√b &nbsp;&nbsp;&nbsp;&nbsp; (only when both sides are defined)</p>
+      <p>ⁿ√(a/b) = ⁿ√a / ⁿ√b &nbsp;&nbsp;&nbsp;&nbsp; (b ≠ 0)</p>
+      <p class="stmt">These let you split a radical apart to isolate perfect-power factors, or combine separate radicals into one.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Simplifying a square root</div>
+      <div class="example-problem">Simplify: √72</div>
+      <div class="example-steps">
+Find the largest perfect square factor of 72:
+  72  =  36 · 2
+
+√72  =  √(36 · 2)  =  √36 · √2  =  6√2
+
+<span class="comment">// Strategy: factor the radicand, pull out perfect squares.</span></div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Simplifying with variables</div>
+      <div class="example-problem">Simplify: √(50x⁵y⁴)  (assume x, y ≥ 0)</div>
+      <div class="example-steps">
+Break into perfect-square pieces:
+  50x⁵y⁴  =  25 · 2 · x⁴ · x · y⁴
+
+√(50x⁵y⁴)  =  √25 · √(x⁴) · √(y⁴) · √(2x)
+             =  5 · x² · y² · √(2x)
+             =  5x²y²√(2x)
+
+<span class="comment">// Key: x⁵ = x⁴ · x, and √(x⁴) = x² since 4 is even.</span>
+<span class="comment">// One x remains inside because its exponent (1) is odd.</span></div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Variable exponents under radicals</div>
+      <p>For √(xⁿ): divide n by 2. The quotient comes out, the remainder stays in.</p>
+      <p>√(x⁷) = x³√x &nbsp;&nbsp; (7 ÷ 2 = 3 remainder 1, so x³ out, x¹ in)</p>
+      <p>For ∛(xⁿ): divide n by 3. Same idea with thirds.</p>
+      <p>∛(x⁸) = x²∛(x²) &nbsp;&nbsp; (8 ÷ 3 = 2 remainder 2, so x² out, x² in)</p>
+    </div>
+
+    <div class="prose">
+      <p><strong>Adding and subtracting radicals</strong> works like combining like terms — you can only combine radicals with the same index and the same radicand.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Like radicals — combining</span>
+3√5 + 7√5  =  10√5         (same radicand: combine)
+√12 + √75  =  ?             (different radicands: simplify first)
+
+  √12  =  2√3
+  √75  =  5√3
+
+  2√3 + 5√3  =  7√3        (now they match)</div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Simplifying Radicals</div>
+      <ol>
+        <li>Simplify: √48</li>
+        <li>Simplify: ∛(54x⁴)</li>
+        <li>Simplify: √(18x³y⁶)</li>
+        <li>Combine: 3√8 + √50 − √2</li>
+        <li>Multiply and simplify: √6 · √15</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 3 -->
+  <div class="section" id="rationalizing">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Rationalizing Denominators</h2>
+    </div>
+
+    <div class="prose">
+      <p>A simplified expression shouldn't have a radical in the denominator. "Rationalizing" means multiplying by a clever form of 1 to clear the radical from the bottom. There are two cases: a monomial denominator and a binomial denominator.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Case 1 — Monomial denominator</div>
+      <div class="example-problem">Rationalize: 5 / √3</div>
+      <div class="example-steps">
+Multiply top and bottom by √3:
+
+  5/√3  ·  √3/√3  =  5√3 / (√3 · √3)  =  5√3 / 3
+
+Answer: 5√3/3
+<span class="comment">// √3 · √3 = 3, which is rational. The denominator is now rationalized.</span></div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Conjugates</div>
+      <p>When the denominator has the form (a + √b) or (a − √b), multiplying by its conjugate eliminates the radical using the difference-of-squares pattern: (a + √b)(a − √b) = a² − b.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Case 2 — Binomial denominator</div>
+      <div class="example-problem">Rationalize: 4 / (3 − √5)</div>
+      <div class="example-steps">
+Multiply by the conjugate (3 + √5)/(3 + √5):
+
+  4/(3−√5) · (3+√5)/(3+√5)
+
+Denominator: (3−√5)(3+√5) = 9 − 5 = 4
+
+Numerator:   4(3+√5) = 12 + 4√5
+
+Result: (12 + 4√5) / 4  =  3 + √5
+
+Answer: 3 + √5
+<span class="comment">// Notice the denominator completely cleared — no radical left.</span></div>
+    </div>
+
+    <div class="watch">
+      <div class="watch-label">Why bother?</div>
+      <p>Historically, rationalizing made arithmetic easier before calculators. Today it's mainly about standard form — your answer looks the same as everyone else's, which matters for checking work and for later algebraic manipulation. It also avoids having to divide by an irrational number.</p>
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Rationalizing</div>
+      <ol>
+        <li>Rationalize: 6 / √2</li>
+        <li>Rationalize: √3 / √7</li>
+        <li>Rationalize: 2 / (1 + √3)</li>
+        <li>Rationalize: (√5 + 1) / (√5 − 1)</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 4 -->
+  <div class="section" id="complex">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Complex Numbers</h2>
+    </div>
+
+    <div class="prose">
+      <p>When we tried to take √(−1) in earlier math, we declared it "impossible." Complex numbers don't make it possible in some magical sense — they <em>define</em> a new object that has the property we want. That object is called <strong>i</strong>.</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">Definition of i</div>
+      <p>i is defined by the property: i² = −1</p>
+      <p>Equivalently: i = √(−1)</p>
+      <p class="stmt">A complex number has the form a + bi, where a and b are real numbers. a is the real part, b is the imaginary part.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Powers of i — they cycle with period 4</span>
+i¹  =  i
+i²  =  -1
+i³  =  i² · i  =  -i
+i⁴  =  i² · i²  =  (-1)(-1)  =  1
+i⁵  =  i⁴ · i  =  i          ← back to start
+
+To find iⁿ: divide n by 4, use the remainder.
+  i²³ → 23 ÷ 4 = 5 remainder 3 → i²³ = i³ = -i</div>
+
+    <div class="concept">
+      <div class="concept-label">Arithmetic of complex numbers</div>
+      <p>Treat i like a variable and apply the usual algebra rules — with one substitution rule: whenever i² appears, replace it with −1.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">Addition and subtraction — combine real and imaginary parts separately</span>
+(3 + 2i) + (1 − 5i)  =  (3+1) + (2−5)i  =  4 − 3i
+(4 − i) − (2 + 3i)   =  (4−2) + (−1−3)i =  2 − 4i</div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Multiplication</div>
+      <div class="example-problem">Multiply: (2 + 3i)(1 − 4i)</div>
+      <div class="example-steps">
+FOIL:
+  2·1   +  2·(−4i)  +  3i·1  +  3i·(−4i)
+= 2     −  8i       +  3i    −  12i²
+
+Replace i² with −1:
+  −12i²  =  −12(−1)  =  12
+
+Collect real and imaginary parts:
+  (2 + 12) + (−8 + 3)i  =  14 − 5i
+
+Answer: 14 − 5i</div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Complex conjugates &amp; division</div>
+      <p>The conjugate of (a + bi) is (a − bi). Their product is always real: (a + bi)(a − bi) = a² + b².</p>
+      <p>To divide complex numbers, multiply numerator and denominator by the conjugate of the denominator — same idea as rationalizing.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Division</div>
+      <div class="example-problem">Simplify: (3 + 2i) / (1 − i)</div>
+      <div class="example-steps">
+Multiply top and bottom by conjugate of denominator (1 + i):
+
+  (3+2i)(1+i)       3 + 3i + 2i + 2i²
+  ───────────── =   ──────────────────
+  (1−i)(1+i)         1 − i²
+
+Denominator: 1 − (−1) = 2
+
+Numerator:   3 + 5i + 2(−1) = 1 + 5i
+
+Result: (1 + 5i) / 2  =  1/2 + (5/2)i
+
+Answer: 1/2 + 5i/2
+<span class="comment">// Standard form: write as a + bi with real and imaginary parts separated.</span></div>
+    </div>
+
+    <div class="watch">
+      <div class="watch-label">√(−n) for n > 0</div>
+      <p>Always rewrite before doing anything else: √(−9) = √(9 · −1) = √9 · √(−1) = 3i. Don't try to apply radical rules directly to negative radicands — do the separation step first.</p>
+      <p>Also: √(−4) · √(−9) ≠ √(36) = 6. The product rule for radicals doesn't apply when both radicands are negative. Do it as 2i · 3i = 6i² = −6.</p>
+    </div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Complex Arithmetic</div>
+      <ol>
+        <li>Simplify: √(−25)</li>
+        <li>Simplify: i³¹</li>
+        <li>Add: (5 − 3i) + (−2 + 7i)</li>
+        <li>Multiply: (4 + i)(4 − i)  — notice anything?</li>
+        <li>Multiply: (1 + 2i)²</li>
+        <li>Divide: (2 + i) / (3 + 2i)</li>
+      </ol>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════ SECTION 5 -->
+  <div class="section" id="quadratics">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Quadratics with Complex Solutions</h2>
+    </div>
+
+    <div class="prose">
+      <p>Now the pieces come together. Not every quadratic has real roots — some have complex ones. The discriminant tells you which case you're in before you do any solving.</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">The Quadratic Formula</div>
+      <p>For ax² + bx + c = 0:</p>
+      <p class="stmt">x = (−b ± √(b² − 4ac)) / 2a</p>
+    </div>
+
+    <div class="theorem">
+      <div class="theorem-label">The Discriminant: b² − 4ac</div>
+      <p>The expression under the radical determines the nature of the roots:</p>
+      <p class="stmt">
+        b² − 4ac &gt; 0 → two distinct real roots<br>
+        b² − 4ac = 0 → one repeated real root (touching x-axis)<br>
+        b² − 4ac &lt; 0 → two complex conjugate roots (no x-intercepts)
+      </p>
+    </div>
+
+    <div class="concept">
+      <div class="concept-label">Connection to Week 1</div>
+      <p>The discriminant is why a degree-2 polynomial always has exactly 2 roots in the complex numbers (Fundamental Theorem of Algebra). When b² − 4ac &lt; 0, those two roots exist — they're just not real. The graph never crosses the x-axis, but the roots are still there in ℂ.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Complex roots</div>
+      <div class="example-problem">Solve: x² − 4x + 13 = 0</div>
+      <div class="example-steps">
+Discriminant: b² − 4ac  =  16 − 4(1)(13)  =  16 − 52  =  −36
+
+Negative → two complex roots.
+
+Quadratic formula:
+  x  =  (4 ± √(−36)) / 2
+     =  (4 ± 6i) / 2
+     =  2 ± 3i
+
+Roots: x = 2 + 3i  and  x = 2 − 3i
+
+<span class="comment">// Complex conjugate pair, as expected for real coefficients.</span></div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Worked Example — Completing the square</div>
+      <div class="example-problem">Solve by completing the square: x² + 6x + 11 = 0</div>
+      <div class="example-steps">
+Move constant:     x² + 6x  =  −11
+
+Complete the square: take half of 6, square it → (3)² = 9
+Add to both sides: x² + 6x + 9  =  −11 + 9  =  −2
+
+Factor left side:  (x + 3)²  =  −2
+
+Take square root:  x + 3  =  ±√(−2)  =  ±i√2
+
+Solve:             x  =  −3 ± i√2
+
+<span class="comment">// Completing the square always works; useful when the formula feels heavy.</span></div>
+    </div>
+
+    <div class="watch">
+      <div class="watch-label">Completing the square — the setup</div>
+      <p>The leading coefficient must be 1 before you complete the square. If you have 2x² + ..., divide everything by 2 first. Forgetting this step leads to wrong answers every time.</p>
+    </div>
+
+    <div class="math-block">
+      <span class="label">From roots back to polynomial — Vieta's formulas (bonus)</span>
+If the roots of ax² + bx + c = 0 are r and s, then:
+
+  r + s  =  −b/a       (sum of roots)
+  r · s  =  c/a        (product of roots)
+
+Example: roots 2+3i and 2−3i
+  Sum:     (2+3i) + (2−3i)  =  4   → −b/a = 4 → b = −4 (with a=1)
+  Product: (2+3i)(2−3i)     =  13  → c/a = 13 → c = 13
+
+Reconstructed: x² − 4x + 13  ✓  (matches our example above)</div>
+
+    <div class="practice">
+      <div class="practice-label">Practice — Complex Solutions</div>
+      <ol>
+        <li>Use the discriminant to classify the roots (don't solve): 3x² − 5x + 4 = 0</li>
+        <li>Solve using the quadratic formula: x² + 2x + 5 = 0</li>
+        <li>Solve by completing the square: x² − 4x + 7 = 0</li>
+        <li>Write a quadratic with real coefficients whose roots are 1 + 2i and 1 − 2i. What are a, b, and c?</li>
+        <li>Challenge: Show that if (a + bi) is a root of a quadratic with real coefficients, then (a − bi) must also be a root. (Hint: plug a + bi into the formula and use conjugate properties.)</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="week-summary">
+    <h3>Week 2 — What you should be able to do</h3>
+    <ul>
+      <li>Convert freely between radical and rational exponent form: x^(m/n) = ⁿ√(xᵐ)</li>
+      <li>Apply all exponent rules to rational exponents</li>
+      <li>Simplify radical expressions by pulling out perfect-power factors</li>
+      <li>Add, subtract, and multiply radical expressions; combine like radicals</li>
+      <li>Rationalize monomial and binomial denominators using conjugates</li>
+      <li>Define i, compute powers of i using the 4-cycle, simplify √(−n)</li>
+      <li>Add, subtract, multiply, and divide complex numbers; write results in a + bi form</li>
+      <li>Use the discriminant to classify roots before solving</li>
+      <li>Solve quadratics with complex roots using the quadratic formula or completing the square</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
